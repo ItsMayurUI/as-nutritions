@@ -1,0 +1,34 @@
+
+<section class="featured-section">
+
+  <div class="featured-container">
+
+    <div class="featured-heading">
+      <div>
+        <span class="section-label">OUR SELECTION</span>
+        <h2>FEATURED <span>PRODUCTS</span></h2>
+        <p>Explore our sports nutrition collection.</p>
+      </div>
+
+      <a routerLink="/shop" class="view-all">
+        VIEW ALL PRODUCTS
+        <i class="bi bi-arrow-up-right"></i>
+      </a>
+    </div>
+
+    <div class="product-grid">
+      @for (product of products; track product.id) {
+        <app-product-card
+          [id]="product.id"
+          [name]="product.name"
+          [category]="product.category"
+          [price]="product.price"
+          [image]="product.image"
+          [badge]="product.badge">
+        </app-product-card>
+      }
+    </div>
+
+  </div>
+
+</section>

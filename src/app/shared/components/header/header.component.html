@@ -1,0 +1,67 @@
+
+<header class="pfn-header">
+  <div class="header-container">
+
+    <!-- Brand Logo -->
+    <a routerLink="/" class="navbar-logo" (click)="closeMenu()">
+      <span class="logo-as">AS</span>
+      <span class="logo-name">NUTRITIONS</span>
+    </a>
+
+    <!-- Desktop / Mobile Navigation -->
+    <nav class="nav-links" [class.open]="isMenuOpen">
+
+      <a routerLink="/"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }"
+         (click)="closeMenu()">
+        Home
+      </a>
+
+      <a routerLink="/shop"
+         routerLinkActive="active"
+         (click)="closeMenu()">
+        Shop All
+      </a>
+
+      <a routerLink="/contact"
+         routerLinkActive="active"
+         (click)="closeMenu()">
+        Contact
+      </a>
+
+    </nav>
+
+    <!-- Cart -->
+    <a routerLink="/cart"
+        class="cart-link"
+        aria-label="Shopping cart"
+        (click)="closeMenu()">
+
+        <i class="bi bi-bag"></i>
+        <span>Cart</span>
+
+        @if (cartService.uniqueProductsCount > 0) {
+            <span class="cart-count">
+            {{ cartService.uniqueProductsCount }}
+            </span>
+        }
+        </a>
+
+    <!-- Mobile Hamburger -->
+    <button
+      type="button"
+      class="menu-toggle"
+      [class.active]="isMenuOpen"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-label="Toggle navigation menu">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </button>
+
+  </div>
+</header>

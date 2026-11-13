@@ -1,0 +1,33 @@
+
+<section class="newsletter-section">
+
+  <div class="newsletter-container">
+
+    <div class="newsletter-content">
+      <span>STAY IN THE GAME</span>
+      <h2>FUEL YOUR <strong>INBOX.</strong></h2>
+      <p>Stay connected with AS Nutritions for product updates and fitness news.</p>
+    </div>
+
+    <form class="newsletter-form" (submit)="onSubscribe($event)">
+      <input
+        type="email"
+        placeholder="Enter your email address"
+        aria-label="Email address"
+        required
+        [value]="email"
+        (input)="onEmailChange($event)">
+
+      <button type="submit">
+        SUBSCRIBE
+        <i class="bi bi-arrow-right"></i>
+      </button>
+    </form>
+
+    @if (message) {
+      <p class="newsletter-message" role="status">{{ message }}</p>
+    }
+
+  </div>
+
+</section>

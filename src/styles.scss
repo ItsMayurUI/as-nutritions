@@ -1,1 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+
+/* Bootstrap */
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* PFN Brand Colors */
+:root {
+  --pfn-black: #101010;
+  --pfn-dark: #191919;
+  --pfn-card: #222222;
+  --pfn-red: #e5252a;
+  --pfn-orange: #f47721;
+  --pfn-white: #ffffff;
+  --pfn-gray: #a5a5a5;
+  --pfn-light: #f5f5f5;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--pfn-white);
+  color: var(--pfn-black);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Reusable buttons */
+.btn-pfn {
+  background: var(--pfn-red);
+  color: var(--pfn-white);
+  border: 1px solid var(--pfn-red);
+  padding: 12px 28px;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+.btn-pfn:hover {
+  background: var(--pfn-orange);
+  border-color: var(--pfn-orange);
+  color: var(--pfn-white);
+}

@@ -1,0 +1,68 @@
+
+<section class="shop-page">
+  <div class="shop-banner">
+    <div class="shop-banner-content">
+      <span>AS NUTRITIONS STORE</span>
+      <h1>SHOP <strong>ALL PRODUCTS</strong></h1>
+      <p>Explore our sports nutrition collection.</p>
+    </div>
+  </div>
+
+  <div class="shop-container">
+    <div class="shop-toolbar">
+      <div>
+        <span class="section-label">OUR COLLECTION</span>
+        <h2>FIND YOUR <strong>FUEL.</strong></h2>
+        <p>{{ filteredProducts.length }} products found</p>
+      </div>
+
+      <div class="shop-controls">
+        <input
+          type="search"
+          placeholder="Search products..."
+          aria-label="Search products"
+          (input)="onSearch($event)">
+
+        <select aria-label="Sort products" (change)="onSort($event)">
+          <option value="default">Default sorting</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+          <option value="name">Name: A to Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="category-filters">
+      @for (category of categories; track category) {
+        <button
+          type="button"
+          [class.active]="selectedCategory === category"
+          (click)="selectCategory(category)">
+          {{ category }}
+        </button>
+      }
+    </div>
+
+    <div class="shop-product-grid">
+      @for (product of filteredProducts; track product.id) {
+        <app-product-card
+          [id]="product.id"
+          [name]="product.name"
+          [category]="product.category"
+          [price]="product.price ? '₹' + product.price : 'Price coming soon'"
+          [image]="product.image"
+          [badge]="product.badge">
+        </app-product-card>
+      } @empty {
+        <div class="empty-products">
+          <i class="bi bi-search"></i>
+          <h3>No products found</h3>
+          <p>Try another search or category.</p>
+          <button type="button" (click)="selectCategory('All')">
+            VIEW ALL PRODUCTS
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+
+<article class="product-card">
+
+  <a [routerLink]="['/product', id]" class="product-image">
+    @if (badge) {
+      <span class="product-badge">{{ badge }}</span>
+    }
+
+    <img [src]="image" [alt]="name" loading="lazy">
+  </a>
+
+  <div class="product-details">
+    <span class="product-category">{{ category }}</span>
+
+    <h3>
+      <a [routerLink]="['/product', id]">{{ name }}</a>
+    </h3>
+
+    <div class="product-bottom">
+      <span class="product-price">{{ price }}</span>
+
+      <a [routerLink]="['/product', id]" class="product-view">
+        <i class="bi bi-arrow-up-right"></i>
+      </a>
+    </div>
+  </div>
+
+</article>

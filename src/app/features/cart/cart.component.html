@@ -1,0 +1,167 @@
+
+<section class="cart-page">
+
+  <div class="cart-banner">
+    <span>AS NUTRITIONS STORE</span>
+    <h1>YOUR <strong>SHOPPING CART</strong></h1>
+    <p>Review your selected products before checkout.</p>
+  </div>
+
+  <div class="cart-container">
+
+    @if (cartService.cartItems$ | async; as items) {
+
+      @if (items.length > 0) {
+
+        <div class="cart-layout">
+
+          <!-- Cart Products -->
+          <div class="cart-products">
+
+            <div class="cart-heading">
+              <h2>YOUR ITEMS ({{ totalItems }})</h2>
+
+              <button
+                type="button"
+                class="clear-cart"
+                (click)="clearCart()">
+                CLEAR CART
+              </button>
+            </div>
+
+            @for (item of items; track item.product.id + item.selectedSize; let i = $index) {
+
+              <div class="cart-item">
+
+                <div class="cart-item-image">
+                  <img
+                    [src]="item.product.image"
+                    [alt]="item.product.name">
+                </div>
+
+                <div class="cart-item-details">
+
+                  <span>{{ item.product.category }}</span>
+
+                  <h3>{{ item.product.name }}</h3>
+
+                  <p>Size: {{ item.selectedSize }}</p>
+
+                  <strong>
+                    {{ item.product.price | currency:'INR':'symbol':'1.0-2':'en-IN' }}
+                  </strong>
+
+                  <div class="cart-item-actions">
+
+                    <div class="quantity-control">
+                      <button
+                        type="button"
+                        aria-label="Decrease quantity"
+                        (click)="updateQuantity(i, item.quantity - 1)">
+                        −
+                      </button>
+
+                      <span>{{ item.quantity }}</span>
+
+                      <button
+                        type="button"
+                        aria-label="Increase quantity"
+                        (click)="updateQuantity(i, item.quantity + 1)">
+                        +
+                      </button>
+                    </div>
+
+                    <button
+                      type="button"
+                      class="remove-item"
+                      (click)="removeItem(i)">
+                      <i class="bi bi-trash"></i>
+                      REMOVE
+                    </button>
+
+                  </div>
+                </div>
+
+                <div class="cart-item-total">
+                  {{ item.product.price * item.quantity | currency:'INR':'symbol':'1.0-2':'en-IN' }}
+                </div>
+
+              </div>
+
+            }
+
+            <a routerLink="/shop" class="continue-shopping">
+              <i class="bi bi-arrow-left"></i>
+              CONTINUE SHOPPING
+            </a>
+
+          </div>
+
+          <!-- Order Summary -->
+          <aside class="cart-summary">
+
+            <h2>ORDER SUMMARY</h2>
+
+            <div class="summary-row">
+              <span>Total Items</span>
+              <strong>{{ totalItems }}</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <strong>
+                {{ subtotal | currency:'INR':'symbol':'1.0-2':'en-IN' }}
+              </strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Delivery</span>
+              <span>Calculated at checkout</span>
+            </div>
+
+            <div class="summary-total">
+              <span>Subtotal</span>
+              <strong>
+                {{ subtotal | currency:'INR':'symbol':'1.0-2':'en-IN' }}
+              </strong>
+            </div>
+
+            <a routerLink="/checkout" class="checkout-button">
+              PROCEED TO CHECKOUT
+              <i class="bi bi-arrow-right"></i>
+            </a>
+
+            <p class="secure-note">
+              <i class="bi bi-shield-check"></i>
+              Secure checkout coming soon
+            </p>
+
+          </aside>
+
+        </div>
+
+      } @else {
+
+        <!-- Empty Cart -->
+        <div class="empty-cart">
+          <i class="bi bi-bag"></i>
+
+          <h2>YOUR CART IS EMPTY</h2>
+
+          <p>
+            Looks like you haven't added any products yet.
+            Explore our collection and find your fuel.
+          </p>
+
+          <a routerLink="/shop">
+            EXPLORE PRODUCTS
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+      }
+
+    }
+
+  </div>
+</section>

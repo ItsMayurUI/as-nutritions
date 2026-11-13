@@ -1,0 +1,132 @@
+
+@if (product; as item) {
+  <section class="product-details-page">
+    <div class="product-details-container">
+
+      <!-- Product Gallery -->
+      <div class="product-gallery">
+        <div class="main-product-image">
+          <img [src]="selectedImage" [alt]="item.name">
+        </div>
+
+        <div class="product-thumbnails">
+          @for (image of item.images; track image) {
+            <button
+              type="button"
+              [class.active]="selectedImage === image"
+              (click)="changeImage(image)">
+              <img [src]="image" [alt]="item.name">
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Product Information -->
+      <div class="product-information">
+
+        <span class="product-category">{{ item.category }}</span>
+
+        @if (item.badge) {
+          <span class="product-badge">{{ item.badge }}</span>
+        }
+
+        <h1>{{ item.name }}</h1>
+
+        <p class="product-price">
+          @if (item.price > 0) {
+            ₹{{ item.price }}
+          } @else {
+            Price coming soon
+          }
+        </p>
+
+        <p class="product-description">
+          {{ item.description }}
+        </p>
+
+        <!-- Size Selection -->
+        <div class="product-option">
+          <label for="product-size">SELECT SIZE</label>
+
+          <select
+            id="product-size"
+            [value]="selectedSize"
+            (change)="selectedSize = $any($event.target).value">
+
+            @for (size of item.sizes; track size) {
+              <option [value]="size">{{ size }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- Quantity -->
+        <div class="product-option">
+          <label>QUANTITY</label>
+
+          <div class="quantity-control">
+            <button
+              type="button"
+              aria-label="Decrease quantity"
+              (click)="changeQuantity(-1)">−</button>
+
+            <span>{{ quantity }}</span>
+
+            <button
+              type="button"
+              aria-label="Increase quantity"
+              (click)="changeQuantity(1)">+</button>
+          </div>
+        </div>
+
+        <!-- Add to Cart -->
+        <button
+          type="button"
+          class="add-cart-button"
+          [disabled]="item.price <= 0 || item.stock <= 0"
+          (click)="addToCart()">
+
+          @if (item.price > 0 && item.stock > 0) {
+            <i class="bi bi-bag-plus"></i>
+            ADD TO CART
+          } @else {
+            CURRENTLY UNAVAILABLE
+          }
+        </button>
+
+        <!-- Cart Feedback -->
+        @if (cartMessage) {
+          <p class="cart-success-message" role="status">
+            <i class="bi bi-check-circle-fill"></i>
+            {{ cartMessage }}
+          </p>
+        }
+
+        <!-- Enquiry -->
+        <a routerLink="/contact" class="whatsapp-button">
+          <i class="bi bi-whatsapp"></i>
+          ENQUIRE ABOUT THIS PRODUCT
+        </a>
+
+        <!-- Additional Information -->
+        <div class="product-extra-info">
+          <p>
+            <i class="bi bi-truck"></i>
+            Delivery details to be confirmed
+          </p>
+
+          <p>
+            <i class="bi bi-shield-check"></i>
+            Product authenticity details to be confirmed
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+} @else {
+  <section class="product-not-found">
+    <h2>Product not found</h2>
+    <p>This product may be unavailable or the link is incorrect.</p>
+    <a routerLink="/shop">BACK TO SHOP</a>
+  </section>
+}
